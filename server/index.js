@@ -1,5 +1,7 @@
 const express = require("express");
 
+const routes = require("./routes");
+
 // Initialize Express application
 const app = express();
 
@@ -7,10 +9,8 @@ const app = express();
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 
-// Initial route
-app.use("/", (req, res) => {
-  res.send("Hello Deric");
-})
+// Routes handler
+app.use("/api/v1", routes)
 
 // Error handling middleware
 app.use((err, req, res, next) => {
