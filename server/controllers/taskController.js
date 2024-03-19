@@ -28,10 +28,12 @@ const taskController = {
   createTask: async (req, res) => {
     try {
       const newTask = new Task(req.body);
+      console.log(newTask);
       await newTask.save();
-      res.status(201).json({ message: "Task created successfully" });
+      // res.status(201).json({ message: "Task created successfully" });
+      res.redirect("/create");
     } catch (error) {
-
+      next(error);
     }
   },
 
