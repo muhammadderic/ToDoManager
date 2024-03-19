@@ -1,7 +1,7 @@
 {
   "name": "server",
   "version": "1.0.0",
-  "description": "using expressjs",
+  "description": "using expressjs and ejs",
   "main": "index.js",
   "scripts": {
     "dev": "nodemon index.js"
