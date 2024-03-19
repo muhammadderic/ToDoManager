@@ -5,6 +5,8 @@ const path = require("path");
 const routes = require("./routes");
 const connectDB = require("./config/db");
 
+const { getAllTasks } = require("./controllers/taskController");
+
 // Initialize Express application
 const app = express();
 
@@ -26,10 +28,10 @@ app.use(express.urlencoded({ extended: true }));
 app.use("/api/v1", routes)
 
 // View routes handler
-app.use("/create", (req, res) => {
+app.get("/create", (req, res) => {
   res.render("pages/AddTask");
 })
-app.use("/", (req, res) => {
+app.get("/", getAllTasks, (req, res) => {
   res.render("pages/home");
 })
 

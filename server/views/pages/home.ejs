@@ -15,6 +15,23 @@
   </header>
   <p>Hello Deric</p>
   <a href="/create" class="button">Create</a>
+  <ul>
+    <% for (const task of locals.tasks) { %>
+      <li>
+        <b>Title:</b>
+        <%= task.title %><br>
+          <b>Description:</b>
+          <%= task.description %><br>
+            <% const dueDate=new Date(task.dueDate); %>
+              <% const dateString=dueDate.toLocaleDateString('en-US', { year: 'numeric' , month: 'long' , day: 'numeric'
+                }); %>
+                <b>Date:</b>
+                <%= dateString %><br>
+                  <b>Priority:</b>
+                  <%= task.priority %><br>
+      </li>
+      <% } %>
+  </ul>
   <footer>
     <%- include("../partials/footer") %>
   </footer>

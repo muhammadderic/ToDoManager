@@ -2,10 +2,11 @@ const Task = require("../models/taskModel");
 
 const taskController = {
   // Get all tasks
-  getAllTasks: async (req, res) => {
+  getAllTasks: async (req, res, next) => {
     try {
       const tasks = await Task.find();
-      res.status(200).json(tasks);
+      res.locals.tasks = tasks;
+      next();
     } catch (error) {
       next(error);
     }
@@ -28,7 +29,6 @@ const taskController = {
   createTask: async (req, res) => {
     try {
       const newTask = new Task(req.body);
-      console.log(newTask);
       await newTask.save();
       // res.status(201).json({ message: "Task created successfully" });
       res.redirect("/create");
