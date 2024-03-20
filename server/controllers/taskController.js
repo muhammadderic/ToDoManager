@@ -5,8 +5,7 @@ const taskController = {
   getAllTasks: async (req, res, next) => {
     try {
       const tasks = await Task.find();
-      res.locals.tasks = tasks;
-      next();
+      res.status(200).json(tasks);
     } catch (error) {
       next(error);
     }
@@ -30,8 +29,7 @@ const taskController = {
     try {
       const newTask = new Task(req.body);
       await newTask.save();
-      // res.status(201).json({ message: "Task created successfully" });
-      res.redirect("/create");
+      res.status(201).json({ message: "Task created successfully" });
     } catch (error) {
       next(error);
     }
