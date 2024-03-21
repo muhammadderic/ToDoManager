@@ -26,6 +26,15 @@ function Home() {
       })
   }
 
+  const deleteTaskHandler = async (id) => {
+    await fetch(`http://localhost:5000/api/v1/tasks/${id}`, {
+      method: "DELETE",
+    }).catch(error => {
+      console.error("Error deleting data: ", error.message);
+    })
+    fetchAllTasks();
+  }
+
   return (
     <div>
       <h1>Hello Deric</h1>
@@ -36,7 +45,7 @@ function Home() {
       {loading ? (
         <p>Loading...</p>
       ) : (
-        <ListTasks tasks={tasks} />
+        <ListTasks tasks={tasks} deleteTaskHandler={deleteTaskHandler} />
       )}
     </div>
   )
