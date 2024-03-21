@@ -1,4 +1,5 @@
 import { useState } from "react";
+import { Link } from "react-router-dom";
 
 function AddTask() {
   const [title, setTitle] = useState("");
@@ -17,7 +18,7 @@ function AddTask() {
     };
 
     try {
-      const response = await fetch("/api/v1/tasks", {
+      const response = await fetch("http://localhost:5000/api/v1/tasks", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
@@ -41,6 +42,9 @@ function AddTask() {
   return (
     <div>
       <h2>Add Task</h2>
+      <Link to="/">
+        <button>Back</button>
+      </Link>
       <form onSubmit={handleSubmit}>
         <div>
           <label htmlFor="title">Title: </label>
@@ -84,7 +88,7 @@ function AddTask() {
           </select>
         </div>
 
-        <button type="submit">Add Task</button>
+        <button type="submit">Submit</button>
       </form>
     </div>
   )

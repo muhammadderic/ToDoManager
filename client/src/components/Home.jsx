@@ -17,6 +17,7 @@ function Home() {
       .then(response => response.json())
       .then(data => {
         setTasks(data);
+        console.log(data);
         setLoading(false);
       })
       .catch(error => {
