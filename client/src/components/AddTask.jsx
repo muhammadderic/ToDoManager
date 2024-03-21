@@ -1,11 +1,17 @@
-import { useState } from "react";
-import { Link } from "react-router-dom";
+import { useEffect, useState } from "react";
+import { Link, useParams } from "react-router-dom";
 
 function AddTask() {
   const [title, setTitle] = useState("");
   const [description, setDescription] = useState("");
   const [dueDate, setDueDate] = useState("");
   const [priority, setPriority] = useState("");
+
+  const { id } = useParams();
+
+  useEffect(() => {
+    getEditTaskData(id);
+  }, [id]);
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -18,16 +24,30 @@ function AddTask() {
     };
 
     try {
-      const response = await fetch("http://localhost:5000/api/v1/tasks", {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify(newTask),
-      })
+      if (id) {
+        const response = await fetch(`http://localhost:5000/api/v1/tasks/${id}`, {
+          method: "PUT",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify(newTask),
+        })
 
-      if (!response.ok) {
-        throw new Error("Failed to add task");
+        if (!response.ok) {
+          throw new Error("Failed to add task");
+        }
+      } else {
+        const response = await fetch("http://localhost:5000/api/v1/tasks", {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify(newTask),
+        })
+
+        if (!response.ok) {
+          throw new Error("Failed to add task");
+        }
       }
 
       setTitle("");
@@ -39,9 +59,34 @@ function AddTask() {
     }
   }
 
+  const formatDate = (dateString) => {
+    // Parse the ISO 8601 date string into a Date object
+    const date = new Date(dateString);
+
+    // Extract year, month, and day from the Date object
+    const year = date.getFullYear();
+    const month = String(date.getMonth() + 1).padStart(2, "0");
+    const day = String(date.getDate()).padStart(2, "0");
+
+    // Construct the formatted date string in yyyy-MM-dd format
+    const formattedDate = `${year}-${month}-${day}`;
+    return formattedDate;
+  }
+
+  const getEditTaskData = async (id) => {
+    const response = await fetch(`http://localhost:5000/api/v1/tasks/${id}`)
+    const task = await response.json();
+    setTitle(task.title);
+    setDescription(task.description);
+    const formattedDate = formatDate(task.dueDate);
+    setDueDate(formattedDate);
+    setPriority(task.priority);
+    // return task;
+  }
+
   return (
     <div>
-      <h2>Add Task</h2>
+      <h2>{id ? "Edit" : "Add Task"}</h2>
       <Link to="/">
         <button>Back</button>
       </Link>
@@ -88,7 +133,7 @@ function AddTask() {
           </select>
         </div>
 
-        <button type="submit">Submit</button>
+        <button type="submit">{id ? "Finish Edit" : "Submit"}</button>
       </form>
     </div>
   )

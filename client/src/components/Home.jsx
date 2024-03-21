@@ -1,12 +1,14 @@
 import { useEffect } from "react";
 import { useState } from "react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 
 import ListTasks from "../components/ListTasks";
 
 function Home() {
   const [tasks, setTasks] = useState([]);
   const [loading, setLoading] = useState(true);
+
+  const navigate = useNavigate();
 
   useEffect(() => {
     fetchAllTasks();
@@ -17,7 +19,6 @@ function Home() {
       .then(response => response.json())
       .then(data => {
         setTasks(data);
-        console.log(data);
         setLoading(false);
       })
       .catch(error => {
@@ -35,6 +36,10 @@ function Home() {
     fetchAllTasks();
   }
 
+  const editTaskHandler = (id) => {
+    navigate(`/addtask/${id}`);
+  }
+
   return (
     <div>
       <h1>Hello Deric</h1>
@@ -45,7 +50,10 @@ function Home() {
       {loading ? (
         <p>Loading...</p>
       ) : (
-        <ListTasks tasks={tasks} deleteTaskHandler={deleteTaskHandler} />
+        <ListTasks
+          tasks={tasks}
+          deleteTaskHandler={deleteTaskHandler}
+          editTaskHandler={editTaskHandler} />
       )}
     </div>
   )

@@ -1,4 +1,8 @@
-const ListData = ({ tasks, deleteTaskHandler }) => {
+const ListData = ({
+  tasks,
+  deleteTaskHandler,
+  editTaskHandler
+}) => {
   const options = { year: 'numeric', month: 'long', day: 'numeric' };
 
   return (
@@ -12,6 +16,7 @@ const ListData = ({ tasks, deleteTaskHandler }) => {
               new Date(task.dueDate).toLocaleDateString('en-US', options)}</p>
             <p>Priority: {task.priority}</p>
             <button onClick={() => deleteTaskHandler(task._id)}>Delete</button>
+            <button onClick={() => editTaskHandler(task._id)}>Edit</button>
           </li>
         ))
       }
