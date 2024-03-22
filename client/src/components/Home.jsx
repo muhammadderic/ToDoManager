@@ -4,6 +4,8 @@ import { Link, useNavigate } from "react-router-dom";
 import "../styles/home.css";
 
 import ListTasks from "../components/ListTasks";
+// import JSON only for Development
+import jsonData from '../backup-data.json';
 
 function Home() {
   const [tasks, setTasks] = useState([]);
@@ -12,7 +14,8 @@ function Home() {
   const navigate = useNavigate();
 
   useEffect(() => {
-    fetchAllTasks();
+    // fetchAllTasks();
+    DEVMODE();
   }, []);
 
   const fetchAllTasks = () => {
@@ -39,6 +42,11 @@ function Home() {
 
   const editTaskHandler = (id) => {
     navigate(`/addtask/${id}`);
+  }
+
+  const DEVMODE = () => {
+    setTasks(jsonData);
+    setLoading(false);
   }
 
   return (

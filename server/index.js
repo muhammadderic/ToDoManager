@@ -29,11 +29,6 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 
 // Routes handler
-app.get("/hehe", (req, res) => {
-  res.json({
-    name: "deric",
-  })
-})
 app.use("/api/v1", routes)
 
 // Error handling middleware
