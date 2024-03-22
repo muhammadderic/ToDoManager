@@ -1,6 +1,7 @@
 import { useEffect } from "react";
 import { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
+import "../styles/home.css";
 
 import ListTasks from "../components/ListTasks";
 
@@ -41,11 +42,11 @@ function Home() {
   }
 
   return (
-    <div>
-      <h1>Hello Deric</h1>
-      <h2>Welcome to Task Manager App</h2>
-      <Link to="/addtask">
-        <button>Add Task</button>
+    <div className="home-container">
+      <h1 className="home__title">Hello Deric</h1>
+      <h2 className="home__subtitle">Welcome to Task Manager App</h2>
+      <Link className="home__add-task__button" to="/addtask">
+        <button className="button">Add Task</button>
       </Link>
       {loading ? (
         <p>Loading...</p>

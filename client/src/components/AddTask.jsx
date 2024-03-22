@@ -10,7 +10,9 @@ function AddTask() {
   const { id } = useParams();
 
   useEffect(() => {
-    getEditTaskData(id);
+    if (id) {
+      getEditTaskData(id);
+    }
   }, [id]);
 
   const handleSubmit = async (e) => {

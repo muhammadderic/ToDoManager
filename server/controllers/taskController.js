@@ -12,7 +12,7 @@ const taskController = {
   },
 
   // Get a task
-  getTask: async (req, res) => {
+  getTask: async (req, res, next) => {
     try {
       const task = await Task.findById(req.params.id);
       if (!task) {
@@ -25,7 +25,7 @@ const taskController = {
   },
 
   // Create a task
-  createTask: async (req, res) => {
+  createTask: async (req, res, next) => {
     try {
       const newTask = new Task(req.body);
       await newTask.save();
@@ -36,7 +36,7 @@ const taskController = {
   },
 
   // Update a task
-  updateTask: async (req, res) => {
+  updateTask: async (req, res, next) => {
     try {
       const updatedTask = await Task.findByIdAndUpdate(req.params.id, req.body, { new: true });
       if (!updatedTask) {
@@ -49,7 +49,7 @@ const taskController = {
   },
 
   // Delete a task
-  deleteTask: async (req, res) => {
+  deleteTask: async (req, res, next) => {
     try {
       const deletedTask = await Task.findByIdAndDelete(req.params.id);
       if (!deletedTask) {
