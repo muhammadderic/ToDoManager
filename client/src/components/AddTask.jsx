@@ -29,10 +29,6 @@ function AddTask() {
       if (id) {
         const response = await fetch(`http://localhost:5000/api/v1/tasks/${id}`, {
           method: "PUT",
-          headers: {
-            "Content-Type": "application/json",
-          },
-          body: JSON.stringify(newTask),
         })
 
         if (!response.ok) {
@@ -85,7 +81,6 @@ function AddTask() {
     const formattedDate = formatDate(task.dueDate);
     setDueDate(formattedDate);
     setPriority(task.priority);
-    // return task;
   }
 
   return (

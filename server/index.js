@@ -21,12 +21,12 @@ dotenv.config({ path: path.join(__dirname, "config", ".env") });
 // Enable CORS
 app.use(cors());
 
-// Connect to DB
-connectDB();
-
 // Middleware
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
+
+// Connect to DB
+connectDB();
 
 // Routes handler
 app.use("/api/v1", routes)

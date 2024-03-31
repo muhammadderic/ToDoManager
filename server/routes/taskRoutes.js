@@ -9,7 +9,6 @@ const {
   deleteTask,
 } = require("../controllers/taskController");
 
-// Routes for tasks
 router.get("/", getAllTasks);
 
 router.get("/:id", getTask);
