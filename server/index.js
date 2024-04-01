@@ -1,8 +1,8 @@
 const express = require("express");
 const dotenv = require("dotenv");
-const cors = require("cors");
 const path = require("path");
 
+const middlewares = require("./middlewares/middlewares");
 const routes = require("./routes");
 const connectDB = require("./config/db");
 
@@ -16,12 +16,8 @@ dotenv.config({ path: path.join(__dirname, "config", ".env") });
 app.set("view engine", "ejs");
 app.set("views", path.join(__dirname, "views"));
 
-// Enable CORS
-app.use(cors());
-
 // Middleware
-app.use(express.json());
-app.use(express.urlencoded({ extended: true }));
+middlewares(app);
 
 // Connect to DB
 connectDB();
