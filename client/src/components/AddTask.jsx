@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { Link, useParams } from "react-router-dom";
+import { Link, useParams, useNavigate } from "react-router-dom";
 import { getTask, addTask, updateTask } from "../api/taskApi";
 import { formatDate } from "../utils/dataUtils";
 import "../styles/home.css";
@@ -12,15 +12,16 @@ function AddTask() {
   const [priority, setPriority] = useState("");
 
   const { id } = useParams();
-
-  useEffect(() => {
-    if (id) {
-      getEditTaskData(id);
-    }
-  }, [id]);
+  const navigate = useNavigate();
 
   const handleSubmit = async (e) => {
     e.preventDefault();
+
+    // Check if priority is selected
+    if (!priority) {
+      alert('Please select a priority');
+      return;
+    }
 
     const newTask = {
       title,
@@ -40,6 +41,7 @@ function AddTask() {
       setDescription("");
       setDueDate("");
       setPriority("");
+      navigate("/");
     } catch (error) {
       console.error("Error", error.message);
     }
@@ -53,6 +55,12 @@ function AddTask() {
     setDueDate(formattedDate);
     setPriority(task.priority);
   }
+
+  useEffect(() => {
+    if (id) {
+      getEditTaskData(id);
+    }
+  }, [id]);
 
   return (
     <div className="container">
