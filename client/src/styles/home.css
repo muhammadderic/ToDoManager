@@ -1,32 +1,26 @@
 .home-container {
-  max-width: 1000px;
+  padding: 2rem;
   margin: auto;
-  padding: 1rem 2rem;
+  margin-top: 1rem;
   background: rgba(255, 255, 255, 0.05);
   backdrop-filter: blur(10px);
-  border-top: 1px solid rgba(255, 255, 255, 0.2);
-  border-left: 1px solid rgba(255, 255, 255, 0.2);
   box-shadow: 5px 5px 30px rgba(0, 0, 0, 0.2);
-  border-radius: 3px;
+  border-radius: 1rem;
+}
+
+.title-container {
+  line-height: 2rem;
+  margin-bottom: 2rem;
 }
 
 .home__title {
-  margin: 0;
-  padding: 15px;
-  background: rgba(255, 255, 255, 0.05);
-  backdrop-filter: blur(10px);
-  border-top: 1px solid rgba(255, 255, 255, 0.2);
-  border-left: 1px solid rgba(255, 255, 255, 0.2);
-  box-shadow: 5px 5px 30px rgba(0, 0, 0, 0.2);
-  border-radius: .2rem;
-  color: #012554;
+  font-weight: 300;
   text-align: center;
 }
 
 .home__subtitle {
-  padding: 1rem 0;
-  color: #012554;
   margin-bottom: 1rem;
+  font-weight: 300;
 }
 
 .home__add-task__button {
@@ -52,6 +46,26 @@
   border-radius: .2rem;
 }
 
+.task__item-title {
+  font-weight: bold;
+}
+
+.task__item-priority-color {
+  font-weight: bold;
+}
+
+.priority-high {
+  color: rgb(255, 56, 56);
+}
+
+.priority-medium {
+  color: rgb(253, 183, 51);
+}
+
+.priority-low {
+  color: rgb(2, 228, 2);
+}
+
 .task__buttons {
   display: flex;
   flex-direction: column;
@@ -60,12 +74,11 @@
 
 .button {
   align-items: center;
-  background-color: #FFFFFF;
+  background-color: #051320;
   border: 1px solid rgba(0, 0, 0, 0.1);
-  border-radius: .25rem;
+  border-radius: 5rem;
   box-shadow: rgba(0, 0, 0, 0.02) 0 1px 3px 0;
   box-sizing: border-box;
-  color: rgba(0, 0, 0, 0.85);
   cursor: pointer;
   display: inline-flex;
   font-size: 16px;

@@ -6,8 +6,6 @@ const path = require("path");
 const routes = require("./routes");
 const connectDB = require("./config/db");
 
-const { getAllTasks } = require("./controllers/taskController");
-
 // Initialize Express application
 const app = express();
 
