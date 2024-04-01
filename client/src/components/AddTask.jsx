@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react";
 import { Link, useParams } from "react-router-dom";
+import { getTask, addTask, updateTask } from "../api/taskApi";
 import "../styles/home.css";
 import "../styles/addtask.css";
 
@@ -29,27 +30,9 @@ function AddTask() {
 
     try {
       if (id) {
-        const response = await fetch(`http://localhost:5000/api/v1/tasks/${id}`, {
-          method: "PUT",
-        })
-
-        if (!response.ok) {
-          throw new Error("Failed to add task");
-        }
+        await updateTask(id, newTask);
       } else {
-        const response = await fetch("http://localhost:5000/api/v1/tasks", {
-          method: "POST",
-          headers: {
-            "Content-Type": "application/json",
-          },
-          body: JSON.stringify(newTask),
-        })
-
-        console.log(response);
-
-        if (!response.ok) {
-          throw new Error("Failed to add task");
-        }
+        await addTask(newTask);
       }
 
       setTitle("");
@@ -76,8 +59,7 @@ function AddTask() {
   }
 
   const getEditTaskData = async (id) => {
-    const response = await fetch(`http://localhost:5000/api/v1/tasks/${id}`)
-    const task = await response.json();
+    const task = await getTask(id);
     setTitle(task.title);
     setDescription(task.description);
     const formattedDate = formatDate(task.dueDate);

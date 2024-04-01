@@ -1,11 +1,12 @@
 import { useEffect } from "react";
 import { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
+import { getAllTasks, deleteTask } from "../api/taskApi";
 import "../styles/home.css";
 
 import ListTasks from "../components/ListTasks";
 // DEV ONLY [1]
-import jsonData from '../backup-data.json';
+// import jsonData from '../backup-data.json';
 
 function Home() {
   const [tasks, setTasks] = useState([]);
@@ -13,31 +14,14 @@ function Home() {
 
   const navigate = useNavigate();
 
-  useEffect(() => {
-    // fetchAllTasks();
-    // DEV ONLY [2]
-    DEVMODE();
-  }, []);
-
-  const fetchAllTasks = () => {
-    fetch("http://localhost:5000/api/v1/tasks/")
-      .then(response => response.json())
-      .then(data => {
-        setTasks(data);
-        setLoading(false);
-      })
-      .catch(error => {
-        console.error("Error fetching data: ", error.message);
-        setLoading(false);
-      })
+  const fetchAllTasks = async () => {
+    const tasks = await getAllTasks();
+    setTasks(tasks);
+    setLoading(false);
   }
 
   const deleteTaskHandler = async (id) => {
-    await fetch(`http://localhost:5000/api/v1/tasks/${id}`, {
-      method: "DELETE",
-    }).catch(error => {
-      console.error("Error deleting data: ", error.message);
-    })
+    await deleteTask(id);
     fetchAllTasks();
   }
 
@@ -46,10 +30,16 @@ function Home() {
   }
 
   // DEV ONLY [3 Last]
-  const DEVMODE = () => {
-    setTasks(jsonData);
-    setLoading(false);
-  }
+  // const DEVMODE = () => {
+  //   setTasks(jsonData);
+  //   setLoading(false);
+  // }
+
+  useEffect(() => {
+    fetchAllTasks();
+    // DEV ONLY [2]
+    // DEVMODE();
+  }, []);
 
   return (
     <div className="container">
