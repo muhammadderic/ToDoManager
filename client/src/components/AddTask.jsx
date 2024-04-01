@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
 import { Link, useParams } from "react-router-dom";
 import { getTask, addTask, updateTask } from "../api/taskApi";
+import { formatDate } from "../utils/dataUtils";
 import "../styles/home.css";
 import "../styles/addtask.css";
 
@@ -42,20 +43,6 @@ function AddTask() {
     } catch (error) {
       console.error("Error", error.message);
     }
-  }
-
-  const formatDate = (dateString) => {
-    // Parse the ISO 8601 date string into a Date object
-    const date = new Date(dateString);
-
-    // Extract year, month, and day from the Date object
-    const year = date.getFullYear();
-    const month = String(date.getMonth() + 1).padStart(2, "0");
-    const day = String(date.getDate()).padStart(2, "0");
-
-    // Construct the formatted date string in yyyy-MM-dd format
-    const formattedDate = `${year}-${month}-${day}`;
-    return formattedDate;
   }
 
   const getEditTaskData = async (id) => {
