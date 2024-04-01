@@ -1,4 +1,7 @@
 const Task = require("../models/taskModel");
+const expressValidator = require("express-validator");
+const { body, validationResult } = expressValidator;
+const { validateTaskCreation } = require("../middlewares/validator");
 
 const taskController = {
   // Get all tasks
@@ -27,6 +30,14 @@ const taskController = {
   // Create a task
   createTask: async (req, res, next) => {
     try {
+      // Apply validation middleware before saving the task
+      const errors = validationResult(req); // Check for validation errors
+
+      if (!errors.isEmpty()) {
+        // Return errors if validation fails
+        return res.status(400).json({ errors: errors.array() });
+      }
+
       const newTask = new Task(req.body);
       await newTask.save();
       res.status(201).json({ message: "Task created successfully" });
