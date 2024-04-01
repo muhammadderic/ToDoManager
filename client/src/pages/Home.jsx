@@ -52,7 +52,7 @@ function Home() {
   }
 
   return (
-    <div className="home-container">
+    <div className="container">
       <div className="title-container">
         <h1 className="home__title">Your Task Manager</h1>
         <h2 className="home__subtitle">Welcome to Task Manager App</h2>

@@ -1,5 +1,7 @@
 import { useEffect, useState } from "react";
 import { Link, useParams } from "react-router-dom";
+import "../styles/home.css";
+import "../styles/addtask.css";
 
 function AddTask() {
   const [title, setTitle] = useState("");
@@ -84,14 +86,15 @@ function AddTask() {
   }
 
   return (
-    <div>
-      <h2>{id ? "Edit" : "Add Task"}</h2>
+    <div className="container">
+      <h2 className="page__title">{id ? "Edit" : "Add Task"}</h2>
       <Link to="/">
-        <button>Back</button>
+        <button className="button">Back</button>
       </Link>
-      <form onSubmit={handleSubmit}>
-        <div>
+      <form onSubmit={handleSubmit} className="addtask__form">
+        <div className="form__input-field">
           <label htmlFor="title">Title: </label>
+          <br />
           <input
             type="text"
             id="title"
@@ -100,8 +103,9 @@ function AddTask() {
             required />
         </div>
 
-        <div>
+        <div className="form__input-field">
           <label htmlFor="description">Description: </label>
+          <br />
           <textarea
             id="description"
             value={description}
@@ -109,8 +113,9 @@ function AddTask() {
             required />
         </div>
 
-        <div>
+        <div className="form__input-field">
           <label htmlFor="dueDate">Due Date: </label>
+          <br />
           <input
             type="date"
             id="dueDate"
@@ -119,8 +124,9 @@ function AddTask() {
             required />
         </div>
 
-        <div>
+        <div className="form__input-field">
           <label htmlFor="priority">Priority Level: </label>
+          <br />
           <select
             id="priority"
             value={priority}
@@ -132,7 +138,9 @@ function AddTask() {
           </select>
         </div>
 
-        <button type="submit">{id ? "Finish Edit" : "Submit"}</button>
+        <div className="form__submit-field">
+          <button className="button addtask__form-button" type="submit">{id ? "Finish Edit" : "Submit"}</button>
+        </div>
       </form>
     </div>
   )
