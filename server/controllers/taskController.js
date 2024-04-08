@@ -1,7 +1,6 @@
 const Task = require("../models/taskModel");
 const expressValidator = require("express-validator");
-const { body, validationResult } = expressValidator;
-const { validateTaskCreation } = require("../middlewares/validator");
+const { validationResult } = expressValidator;
 
 const taskController = {
   // Get all tasks

@@ -15,5 +15,3 @@ exports.validateTaskCreation = [
     .isIn(["Low", "Medium", "High"])
     .withMessage("Invalid priority value")
 ]
-
-// module.exports = validateTaskCreation;
