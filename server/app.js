@@ -4,6 +4,7 @@ const path = require("path");
 
 const middlewares = require("./middlewares/middlewares");
 const routes = require("./routes");
+const errorHandler = require("./middlewares/errors/errorHandler");
 
 // Initialize Express application
 const app = express();
@@ -22,9 +23,6 @@ middlewares(app);
 app.use("/api/v1", routes)
 
 // Error handling middleware
-app.use((err, req, res, next) => {
-  console.error(err.stack);
-  res.status(500).json({ message: "Something went wrong" });
-})
+app.use(errorHandler);
 
 module.exports = app;
